@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="./images/feba-logo.svg" />
+    <title>FEBA shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+      * {
+        font-family: "cairo";
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #ecf0f1;
+      }
+      .product-card {
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+        
+        overflow: hidden;
+        
+        
+        cursor: pointer;
+      }
+      .product-card:hover {
+        transform: translateY(-3px);
+        
+      }
+      
+      .original-price {
+        text-decoration: line-through;
+        color: #888;
+        font-size: 14px;
+        margin-left: 5px;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <div
+      style="cursor: default;"
+      id="elegantText"
+      class=" select-none text-orange-500 text-center py-4 text-xl sm:text-4xl font-bold tracking-wide uppercase transition-all duration-700 ease-out"
+      >
+      لمستك الأنيقة تبدأ هنا
+    </div>
+
+    <header class="bg-white shadow-lg">
+      <div
+        class="container mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <a href="../../index.html" class="flex items-center space-x-2 ">
+          <img
+            src="https://raw.githubusercontent.com/febashop/website-assets/383e74c22f796140ffa15b059cd468720064453f/feba-logo.svg"
+            alt="Feba Logo"
+            class="h-10 md:h-20 w-auto"
+          />
+        </a>
+
+        <button
+          id="menuToggle"
+          class="md:hidden text-gray-700 focus:outline-none hover:text-orange-500 transition"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+
+        <div class="hidden md:flex items-center space-x-6">
+          <div
+            class="absolute left-1/2 transform -translate-x-1/2 w-1/3 hidden md:block"
+          >
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="🔥"
+              class="w-full px-4 py-2 border-2 border-gray-800 rounded font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 placeholder-gray-400"
+            />
+          </div>
+
+          <div class="flex space-x-4 items-center">
+            <a
+              href="https://www.instagram.com/febashop/"
+              target="_blank"
+              class="text-gray-600 hover:text-pink-500 transition-transform duration-300 hover:scale-110"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.tiktok.com/@feba_shop"
+              target="_blank"
+              class="text-gray-600 hover:text-black transition-transform duration-300 hover:scale-110 hover:animate-pulse"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://wa.me/212619786178"
+              target="_blank"
+              class="text-gray-600 hover:text-green-500 transition-transform duration-300 hover:scale-110 hover:animate-pulse"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden bg-gray-50 border-t border-gray-200"
+      >
+        <div class="p-4 flex flex-col space-y-4">
+          <input
+            id="mobileSearch"
+            type="text"
+            placeholder="🔥"
+            class="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-500"
+          />
+
+          <div class="flex justify-center space-x-4 items-center mt-2">
+            <a
+              href="https://www.instagram.com/febashop/"
+              target="_blank"
+              class="text-gray-600 hover:text-pink-500 transition-transform duration-300 hover:scale-110"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.tiktok.com/@feba_shop"
+              target="_blank"
+              class="text-gray-600 hover:text-black transition-transform duration-300 hover:scale-110 hover:animate-pulse"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://wa.me/212619786178"
+              target="_blank"
+              class="text-gray-600 hover:text-green-500 transition-transform duration-300 hover:scale-110 hover:animate-pulse"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+                />
+              </svg>
+            </a>
+          </div>
+          <nav class="flex flex-col space-y-2">
+            <button 
+              class="category-btn px-4 py-2 bg-orange-500 text-white rounded"
+              data-category="all"
+            >
+              الكل
+            </button>
+            <button id="menuToggle"
+              class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+              data-category="عباية"
+            >
+              عباية
+            </button>
+            <button
+              class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+              data-category="بيجامة"
+            >
+              بيجامة
+            </button>
+            <button
+              class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+              data-category="ملابس رياضية"
+            >
+              ملابس رياضية
+            </button>
+            <button
+              class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+              data-category="جلابة"
+            >
+              جلابة
+            </button>
+
+            <button
+              class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+              data-category="مجوهرات"
+            >
+              مجوهرات
+            </button>
+
+            <button
+              class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+              data-category="حقائب و أحذية"
+            >
+            حقائب و أحذية
+            </button>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <nav
+      class="hidden md:flex bg-white border-t border-gray-200 py-2 justify-center"
+    >
+      <div class="flex space-x-4">
+        <button
+          class="category-btn px-4 py-2 bg-orange-500 text-white rounded"
+          data-category="all"
+        >
+          الكل
+        </button>
+        <button
+          class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+          data-category="عباية"
+        >
+          عباية
+        </button>
+        <button
+          class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+          data-category="بيجامة"
+        >
+          بيجامة
+        </button>
+        <button
+          class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+          data-category="ملابس رياضية"
+        >
+          ملابس رياضية
+        </button>
+        <button
+          class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+          data-category="جلابة"
+        >
+          جلابة
+        </button>
+        <button
+          class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+          data-category="مجوهرات"
+        >
+          مجوهرات
+        </button>
+        <button
+          class="category-btn px-4 py-2 hover:bg-gray-200 rounded"
+          data-category="حقائب و أحذية"
+        >
+          حقائب و أحذية
+        </button>
+      </div>
+    </nav>
+
+    <script>
+      // Toggle Menu on Mobile
+      const menuToggle = document.getElementById("menuToggle");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    </script>
+
+    <div class="w-full flex justify-center">
+      <div class="relative w-full container md:w-[70%] h-[150px] md:h-[300px] overflow-hidden">
+        <div class="flex transition-transform duration-500" id="slider"></div>
+      </div>
+    </div>
+
+    <main class=" w-full md:w-[80%] flex-grow container mx-auto px-2 sm:px-4 py-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-8 text-center">
+        إكتشفي اخر المنتجات
+      </h2>
+      <div
+        class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 sm:gap-6"
+        id="productGrid"
+      ></div>
+    </main>
+
+    <footer dir="rtl" class="bg-black text-white">
+      <div class="container mx-auto px-4 py-8 md:py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-right">
+        
+        <div class="col-span-1">
+          <img
+            src="https://raw.githubusercontent.com/febashop/website-assets/72637aedc92d677158e613bfd8b295b6dd6edb72/feba-logo-white.svg"
+            alt="Feba Logo White"
+            class="h-16 w-auto mb-4 inline-block"
+          />
+          <p class="text-sm text-gray-400 mb-4">
+            متجر FEBA هو وجهتك للأزياء النسائية. لطلب أو استفسار، تواصل معنا:
+          </p>
+          
+          <a dir="ltr" href="https://wa.me/212619786178" target="_blank" class="text-sm font-bold text-orange-500 hover:text-orange-300 transition flex items-center justify-end">
+             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512" class="h-5 w-5 text-green-500 mr-2">
+                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+              </svg>
+            <span class="text-white text-base font-semibold"> 212619786178 </span>
+              
+            </a>
+        </div>
+
+        <div class="col-span-1">
+          <h3 class="text-lg font-bold mb-4 border-b border-orange-500 pb-1 inline-block">تابعونا</h3>
+          <ul class="space-y-2 text-sm mt-4">
+            <li><a href="https://www.instagram.com/febashop/" target="_blank" class="text-gray-400 hover:text-orange-500 transition">إنستغرام</a></li>
+            <li><a href="https://www.tiktok.com/@feba_shop" target="_blank" class="text-gray-400 hover:text-orange-500 transition">تيك توك</a></li>
+            <li><a href="./index.html" class="text-gray-400 hover:text-orange-500 transition">الرئيسية</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-span-1">
+          <h3 class="text-lg font-bold mb-4 border-b border-orange-500 pb-1 inline-block">الدفع والشحن</h3>
+          <p class="text-sm text-gray-400 mb-4 mt-4">
+            يتم الدفع **عند الاستلام** وتوفير خدمة الشحن لجميع المدن المغربية.
+          </p>
+          
+          <div class="text-right">
+            <span class="bg-white text-black text-xs font-bold px-3 py-1 rounded shadow-md inline-block">
+                الدفع عند الاستلام
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="py-4 container mx-auto px-4 text-center border-t border-gray-800 text-gray-500 text-sm">
+        &copy; 2025 FEBAshop. جميع الحقوق محفوظة.
+      </div>
+    </footer>
+    <script>
+      const products = [
+        
+        {
+          title: "عباية ستراس الإمراتية",
+          img: "https://cdn.jsdelivr.net/gh/febashop/website-assets/products/abaya/abaya-strass/abaya-strass-move001.webp",
+          price: "349.00",
+          originalPrice: "450.00",
+          discount: 81,
+          category: "عباية",
+          tag: "",
+          link: "./products/abaya/عباية-ستراس-الإمراتية-بالفولار"  
+        },
+        
+      ];
+      // Generate product cards
+      const productGrid = document.getElementById("productGrid");
+      
+      products.forEach(product => {
+        // Create discount badge if applicable
+        const discountBadge = product.discount ? 
+          `<div class="discount-badge absolute top-2.5 right-2.5 bg-red-500 text-white px-2 py-1 rounded font-bold text-[8px] md:text-xs ">-${product.discount}%</div>` : '';
+        
+        // Create sale tag if applicable
+        const saleTag = product.tag ? 
+          `<div class="sale-tag absolute top-2.5 left-2.5 bg-black text-white px-2 py-1 rounded font-bold text-[8px] md:text-xs" >${product.tag}</div>` : '';
+
+        // Create the product card as an anchor tag
+        const card = document.createElement("a");
+        card.href = product.link;
+        card.className = "product-card block";
+        card.setAttribute("data-category", product.category);
+
+        card.innerHTML = `
+          <div class="relative" >
+            <img src="${product.img}" class="w-full h-50 md:h-50 object-cover" alt="${product.title}">
+            ${discountBadge}
+            ${saleTag}
+          </div>
+          <div class="p-4 flex flex-col flex-grow">
+            <div class="float-right mb-1">
+              <div class="flex items-center justify-end space-x-2">
+                  <span class="text-[8px] md:text-xs text-gray-500">التوصيل مجاني</span>
+                  <span class="text-[8px] md:text-xs text-gray-500">•</span>
+                  <span class="text-[8px] md:text-xs text-red-500 bg-gray-200 px-2 py-1 rounded">${product.category}</span>
+              </div>
+            </div>
+            <h3 class="title text-sm font-medium text-gray-800 mb-2 text-right ">${product.title}</h3>
+            <div class="mt-auto float-right">
+              <div class="flex items-center justify-end">
+                <span class="text-[15px]  font-bold text-orange-500"> ${product.price} MAD</span>
+                ${product.originalPrice ? `<span class="original-price text-[9px] md:text-[14px]">  ${product.originalPrice} MAD</span>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+
+        productGrid.appendChild(card);
+      });
+
+      // Slider
+      const slider = document.getElementById("slider");
+
+      // Add your image URLs here
+      const images = [
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets/banners/bn001.webp",
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets/banners/bn002.webp",
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets/banners/bn003.webp",
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets/banners/bn004.webp",
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets/banners/bn005.webp",
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets/banners/bn006.webp",
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets/banners/bn007.webp",
+      ];
+      images.forEach((src) => {
+        const div = document.createElement("div");
+        div.className = "flex-shrink-0 w-full h-[150px] md:h-[300px] ";
+        const img = document.createElement("img");
+        img.src = src; // use your own images
+        img.className = "w-full h-full object-cover";
+        // --- التعديل الذي تم إضافته لتحسين الأداء (تم إعادته) ---
+        img.loading = "lazy"; 
+        img.decoding = "async";
+        // ------------------------------------------
+        div.appendChild(img);
+        slider.appendChild(div);
+      });
+
+      let slideIndex = 0;
+      function showSlides() {
+        slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+      }
+      function nextSlide() {
+        slideIndex = (slideIndex + 1) % images.length;
+        showSlides();
+      }
+      function prevSlide() {
+        slideIndex = (slideIndex - 1 + images.length) % images.length;
+        showSlides();
+      }
+
+      
+      setInterval(nextSlide, 3000);
+
+      // Categories
+      const cards = document.querySelectorAll(".product-card");
+      const categoryButtons = document.querySelectorAll(".category-btn");
+      
+      categoryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const category = button.getAttribute("data-category");
+          categoryButtons.forEach((btn) => {
+            mobileMenu.classList.toggle("hidden");
+            if (btn === button) {
+              btn.classList.add("bg-orange-500", "text-white");
+              btn.classList.remove("hover:bg-gray-200");
+              mobileMenu.classList.toggle("hidden");
+              
+            } else {
+              btn.classList.remove("bg-orange-500", "text-white");
+              btn.classList.add("hover:bg-gray-200");
+            }
+          });
+          cards.forEach((card) => {
+            card.style.display =
+              category === "all" ||
+              card.getAttribute("data-category") === category
+                ? ""
+                : "none";
+          });
+        });
+      });
+
+      // Search (desktop + mobile)
+      const searchInputs = [
+        document.getElementById("searchInput"),
+        document.getElementById("mobileSearch"),
+      ];
+      searchInputs.forEach((input) => {
+        if (!input) return;
+        input.addEventListener("keyup", () => {
+          const value = input.value.toLowerCase();
+          cards.forEach((card) => {
+            const title = card
+              .querySelector(".title")
+              .textContent.toLowerCase();
+            card.style.display = title.includes(value) ? "" : "none";
+          });
+        });
+      });
+
+      //تغيير حركة و مضمون النص
+
+      const texts = [
+        "لمستك الأنيقة تبدأ هنا",
+        "موضتك… كما تحبين",
+        "اختيارك يعبر عنك",
+        "أناقة كل يوم",
+        "إطلالتك أجمل معنا"
+      ];
+
+      // تأثيرات ناعمة مناسبة لمتجر نسائي
+      const effects = [
+        "opacity-0 translate-y-3",
+        "opacity-0 -translate-y-3",
+        "opacity-0 scale-95",
+        "opacity-0 blur-sm"
+      ];
+
+      let index = 0;
+      const el = document.getElementById("elegantText");
+
+      function changeText() {
+        const effect = effects[Math.floor(Math.random() * effects.length)];
+
+        el.classList.add(...effect.split(" "));
+
+        setTimeout(() => {
+          index = (index + 1) % texts.length;
+          el.textContent = texts[index];
+          el.classList.remove(...effect.split(" "));
+        }, 650);
+      }
+
+      setInterval(changeText, 2800);
+
+
+      
+
+      
+
+      
+      
+
+    </script>
+
+
+  </body>
+</html>
