@@ -1,9 +1,7 @@
 {
-  
   "name": "febashop",
   "compatibility_date": "2025-12-17",
   "assets": {
-    "directory": "./",
-    "binding": "ASSETS"
+    "directory": "./"
   }
 }
