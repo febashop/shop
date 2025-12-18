@@ -88,6 +88,33 @@
         opacity: 0.6;
       }
     }
+
+        /* الهيكل الرمادي */
+    .productCardSkeleton {
+      background-color: #e2e8f0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    /* حركة اللمعان */
+    .productCardSkeleton::after {
+      content: "";
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      transform: translateX(-100%);
+      background-image: linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+      animation: productSkeletonShimmer 1.5s infinite;
+    }
+
+    @keyframes productSkeletonShimmer {
+      100% { transform: translateX(100%); }
+    }
+
+    /* إخفاء وإظهار المحتوى */
+    .product-content-hidden { opacity: 0; transition: opacity 0.5s ease; }
+    .is-product-ready .product-content-hidden { opacity: 1; }
+    .is-product-ready .product-skeleton-overlay { display: none; }
   </style>
 
   <title id="pageTitle">FEBA shop</title>
@@ -808,7 +835,7 @@
       },
 
       {
-          title: "أونصومبل-جوبة",
+          title: "أونصومبل جوبة",
           img: "https://cdn.jsdelivr.net/gh/febashop/website-assets@main/products/enssembl/enssemnle-jupe/enssembl-jupe-camel002.webp",
           price: "230.00",
           originalPrice: "300.00",
@@ -836,43 +863,52 @@
     // إنشاء بطاقات المنتجات ذات الصلة
     const relatedProductsGrid = document.getElementById("relatedProducts");
     
+    // تفريغ الشبكة أولاً
+    relatedProductsGrid.innerHTML = "";
+
     relatedProducts.forEach(product => {
-      const discountBadge = product.discount ? 
-        `<div class="discount-badge absolute top-2.5 right-2.5 bg-red-500 text-white px-2 py-1 rounded font-bold text-[8px] md:text-xs">-${product.discount}%</div>` : '';
-      
-      const saleTag = product.tag ? 
-        `<div class="sale-tag absolute top-2.5 left-2.5 bg-black text-white px-2 py-1 rounded font-bold text-[8px] md:text-xs">${product.tag}</div>` : '';
+        const card = document.createElement("a");
+        card.href = product.link;
+        // الكلاسات الأساسية للبطاقة مع التأثيرات
+        card.className = "product-card block relative bg-white rounded-lg overflow-hidden border border-gray-100 shadow-sm transition-all duration-300 hover:-translate-y-1";
+        
+        card.innerHTML = `
+            <div class="product-skeleton-overlay absolute inset-0 z-10 p-3 flex flex-col bg-white">
+              <div class="productCardSkeleton w-full h-40 md:h-48 mb-3"></div> <div class="flex justify-end mb-2"><div class="productCardSkeleton w-20 h-3"></div></div> <div class="productCardSkeleton w-full h-4 mb-3"></div> <div class="mt-auto flex justify-end"><div class="productCardSkeleton w-24 h-5"></div></div> </div>
 
-      const card = document.createElement("a");
-      card.href = product.link;
-      card.className = "product-card block  overflow-hidden";
-      card.setAttribute("data-category", product.category);
+            <div class="product-content-hidden flex flex-col h-full">
+              <div class="relative">
+                <img src="${product.img}" 
+                    class="w-full h-40 md:h-48 object-cover" 
+                    alt="${product.title}" 
+                    loading="lazy"
+                    onload="this.closest('.product-card').classList.add('is-product-ready')">
+                
+                ${product.discount ? `<div class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded font-bold text-[8px] md:text-xs">-${product.discount}%</div>` : ''}
+                ${product.tag ? `<div class="absolute top-2 left-2 bg-black text-white px-2 py-1 rounded font-bold text-[8px] md:text-xs">${product.tag}</div>` : ''}
+              </div>
 
-      card.innerHTML = `
-        <div   class="relative">
-          <img src="${product.img}" class="w-full h-40 md:h-48 object-cover" alt="${product.alt}" loading="lazy">
-          ${discountBadge}
-          ${saleTag}
-        </div>
-        <div dir="ltr" class="p-3 flex flex-col flex-grow">
-          <div class="float-right mb-1">
-            <div class="flex items-center justify-end space-x-2">
-                <span class="text-[8px] md:text-xs text-gray-500">التوصيل مجاني</span>
-                <span class="text-[8px] md:text-xs text-gray-500">•</span>
-                <span class="text-[8px] md:text-xs text-red-500 bg-gray-200 px-2 py-1 rounded">${product.category}</span>
+              <div dir="ltr" class="p-3 flex flex-col flex-grow">
+                <div class="float-right mb-1">
+                  <div class="flex items-center justify-end space-x-2">
+                      <span class="text-[8px] md:text-xs text-gray-500">التوصيل مجاني</span>
+                      <span class="text-[8px] md:text-xs text-gray-500">•</span>
+                      <span class="text-[8px] md:text-xs text-red-500 bg-gray-200 px-2 py-1 rounded">${product.category}</span>
+                  </div>
+                </div>
+
+                <h3 class="text-sm font-medium text-gray-800 mb-2 text-right">${product.title}</h3>
+
+                <div class="mt-auto float-right">
+                  <div class="flex items-center justify-end">
+                    <span class="text-[15px] font-bold text-orange-500">${product.price} MAD</span>
+                    ${product.originalPrice ? `<span class="original-price text-[9px] md:text-[12px] ml-2 line-through text-gray-400">${product.originalPrice} MAD</span>` : ''}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <h3 class="text-sm font-medium text-gray-800 mb-2 text-right">${product.title}</h3>
-          <div class="mt-auto float-right">
-            <div class="flex items-center justify-end">
-              <span class="text-[15px]  font-bold text-orange-500">${product.price} MAD</span>
-              ${product.originalPrice ? `<span class="original-price text-[9px] md:text-[12px]">${product.originalPrice} MAD</span>` : ''}
-            </div>
-          </div>
-        </div>
-      `;
-
-      relatedProductsGrid.appendChild(card);
+        `;
+        relatedProductsGrid.appendChild(card);
     });
 
     // تأثير تغيير النص
