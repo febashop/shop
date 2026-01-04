@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta property="og:image" content= "https://cdn.jsdelivr.net/gh/febashop/website-assets@main/products/mojawharat/sautoir-cd-inoxydable/sautoir-cd-inoxydable-socialmedia.jpg" />
+  <meta property="og:image:width" content="800" /> 
+  <meta property="og:image:height" content="800" />
+  <meta property="og:image:type" content="image/jpeg" />
+<meta property="og:title" content="خاتم شباكية فاخر - إنوكسيدابل مقاوم للصدأ | FEBA Shop" />
+
+<meta property="og:description" content="تألقي بخاتم الشباكية العصري من FEBA! تصميم راقي بلمسة ذهبية لا تتغير (Inoxydable). متوفر الآن بمقاسات مختلفة ليناسب جمال يديكِ. تسوقي الأناقة والجودة." />
+
+<meta name="keywords" content="خاتم شباكية، خاتم إنوكس، bijoux inoxydable maroc، إكسسوارات نسائية، خواتم مطلية بالذهب، مجوهرات فيبا، FEBA Shop، خاتم ماكيكحالش، bijoux xuping maroc">
+
+<meta name="description" content="اشتري الآن خاتم شباكية إنوكسيدابل (Inoxydable) بجودة عالية ولون ذهبي ثابت. تصميم مميز يجمع بين الأصالة والعصرية من متجر FEBA. توصيل سريع لجميع المدن المغربية.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/febashop/website-assets/294cefdac2ddef81f6459e8f1d7fec351dc735d0/feba-icon.svg" type="image/x-icon">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap');
+    * {
+      font-family: "Cairo", sans-serif;
+    }
+    body {
+      background: #ecf0f1;
+    }
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-3px);
+    }
+    .original-price {
+      text-decoration: line-through;
+      color: #888;
+      font-size: 14px;
+      margin-left: 5px;
+    }
+    
+    /* مقاسات دائرية */
+    .size-option-circle {
+      transition: all 0.2s ease;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: bold;
+      border: 2px solid #d1d5db;
+    }
+    .size-option-circle:hover {
+      border-color: #f97316;
+      transform: scale(1.05);
+    }
+    .size-option-circle.selected {
+      background-color: #1f2937;
+      color: white;
+      border-color: #1f2937;
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    }
+    
+    .thumbnail {
+      transition: all 0.2s ease;
+    }
+    .thumbnail:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+    .buy-button {
+      transition: all 0.3s ease;
+    }
+    .buy-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+    }
+    
+    /* NEW: Skeleton CSS for smooth loading */
+    .skeleton {
+      background-color: #e0e0e0;
+      animation: pulse 1.5s infinite;
+      border-radius: 8px;
+    }
+    .thumbnail-skeleton {
+      width: 80px;
+      height: 80px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    @keyframes pulse {
+      0% {
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 0.9;
+      }
+      100% {
+        opacity: 0.6;
+      }
+    }
+
+    /* تأثير الهيكل لبطاقة المنتج */
+    .productCardSkeleton {
+      background-color: #e2e8f0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+
+    /* حركة اللمعان (Shimmer) */
+    .productCardSkeleton::after {
+      content: "";
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      transform: translateX(-100%);
+      background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      animation: productSkeletonShimmer 1.5s infinite;
+    }
+
+    @keyframes productSkeletonShimmer {
+      100% { transform: translateX(100%); }
+    }
+
+    /* التحكم في ظهور المحتوى الحقيقي */
+    .product-content-hidden { opacity: 0; transition: opacity 0.5s ease; }
+    .is-product-ready .product-content-hidden { opacity: 1; }
+    .is-product-ready .product-skeleton-overlay { display: none; }
+  </style>
+
+  <title id="pageTitle">FEBA shop</title>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+  <header class="bg-white ">
+    <div class="bg-[#ecf0f1] md:hidden">
+      <div
+        style="cursor: default;"
+        id="elegantText"
+        class="select-none text-orange-500 text-center py-4 text-xl sm:text-4xl font-bold tracking-wide uppercase transition-all duration-700 ease-out"
+        aria-label="شعار الموقع"
+        >
+        لمستك الأنيقة تبدأ هنا
+      </div>
+
+    </div>
+    
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      
+      <a href="../../index.html" class="flex items-center">
+        <img
+          src="https://raw.githubusercontent.com/febashop/website-assets/383e74c22f796140ffa15b059cd468720064453f/feba-logo.svg"
+          alt="شعار FEBA"
+          class="h-10 md:h-20 w-auto"
+        />
+      </a>
+
+      <div class=" md:flex items-center space-x-6">
+          <div
+            class="absolute left-1/2 transform -translate-x-1/2 w-1/3 hidden md:block "
+          >
+            <div
+            style="cursor: default;"
+            id="elegantText2"
+            class="select-none text-orange-500 text-center py-4 text-xl sm:text-4xl font-bold tracking-wide uppercase transition-all duration-700 ease-out"
+            aria-label="شعار الموقع للشاشات الكبيرة"
+            >
+            لمستك الأنيقة تبدأ هنا
+            </div>
+            
+          </div>
+
+          <div class="flex space-x-4 items-center">
+            <a
+            href="../../index.html"
+            class="text-gray-600 hover:text-orange-500 transition-transform duration-300 hover:scale-110"
+            aria-label="الصفحة الرئيسية"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </a>
+            <a
+              href="https://www.instagram.com/febashop/"
+              target="_blank"
+              class="text-gray-600 hover:text-pink-500 transition-transform duration-300 hover:scale-110"
+              aria-label="حساب انستغرام"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.tiktok.com/@feba_shop"
+              target="_blank"
+              class="text-gray-600 hover:text-black transition-transform duration-300 hover:scale-110 hover:animate-pulse"
+              aria-label="حساب تيك توك"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://wa.me/212619786178"
+              target="_blank"
+              class="text-gray-600 hover:text-green-500 transition-transform duration-300 hover:scale-110 hover:animate-pulse"
+              aria-label="اتصل بنا عبر واتساب"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex-grow container mx-auto px-4 py-6 md:w-[70%]">
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <div dir="rtl">
+        <div class="relative w-full bg-white rounded-lg shadow-md overflow-hidden">
+          
+          <div class="relative w-full h-[340px] md:h-[500px] bg-white">
+              <div id="mainImageSkeleton" class="absolute inset-0 skeleton"></div>
+              
+              <img
+                id="mainImage"
+                src=""
+                class="w-full h-full object-cover opacity-0 transition-opacity duration-500"
+                alt="مجموعة جواهر FEBA"
+                loading="eager"
+              />
+          </div>
+          <button
+            id="prev"
+            class="absolute top-1/2 right-2 w-10 h-16 bg-gray-400 bg-opacity-60 text-white text-3xl flex items-center justify-center cursor-pointer rounded z-10 -translate-y-1/2 hover:bg-opacity-80 transition-all"
+            aria-label="الصورة السابقة"
+          >
+            &#10094;
+          </button>
+
+          <button
+            id="next"
+            class="absolute top-1/2 left-2 w-10 h-16 bg-gray-400 bg-opacity-60 text-white text-3xl flex items-center justify-center cursor-pointer rounded z-10 -translate-y-1/2 hover:bg-opacity-80 transition-all"
+            aria-label="الصورة التالية"
+          >
+            &#10095;
+          </button>
+        </div>
+
+        <div
+          id="thumbnailList"
+          class="mt-4 flex flex-row gap-3 overflow-x-auto py-2 px-1"
+        >
+          </div>
+      </div>
+
+      <div dir="rtl">
+        <h1 class="text-3xl font-bold text-gray-900 mb-1" id="productTitleDisplay">
+          </h1>
+        <p class="text-gray-500 text-sm" id="productTagDisplay">
+          </p>
+
+        <div  id="saleBox">
+          </div>
+
+        <!-- تمت إزالة قسم الألوان -->
+        
+        <h3 class="text-lg font-bold mt-6 mb-4 text-gray-800">
+          <!-- المقاسات المتوفرة: -->
+          <span id="selectedSize" class="text-orange-600"></span>
+        </h3>
+        <div id="sizes" class="flex gap-4 flex-wrap"></div>
+        
+        <div class="flex items-center gap-4 mt-8 md:mx-10">
+
+          <button class="w-20 h-[54px] py-6 border rounded-lg bg-white shadow flex items-center justify-center buy-button" id="shareButton" aria-label="مشاركة المنتج">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+          </button>
+
+          <button 
+            id="whatsappOrderButton" 
+            class="flex items-center gap-2 justify-center bg-orange-500 text-white px-8 py-3 rounded-lg font-bold text-lg w-full md:w-full shadow hover:bg-orange-600 transition buy-button"
+            aria-label="طلب المنتج عبر واتساب"
+          >
+            <svg
+                xmlns="http://www.w3.org2000/svg"
+                fill="currentColor"
+                viewBox="0 0 448 512"
+                class="h-6 w-6"
+              >
+                <path
+                  d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+                />
+              </svg>
+            طلب المنتج
+          </button>
+        </div>
+
+        <h2 class="text-2xl font-bold mt-10 mb-4">تفاصيل المنتج</h2>
+
+        <p class="text-gray-700 leading-relaxed">
+          تجسّد جواهر FEBA الأناقة والفخامة في تصميماتها الراقية. كل قطعة مصممة بعناية فائقة باستخدام أفضل المواد والأحجار الكريمة لتناسب جميع المناسبات وتضفي لمسة من البريق على إطلالتك.
+        </p>
+        
+        
+
+      </div>
+
+    </div>
+
+    <div dir="rtl">
+      <h2 class="text-xl font-bold mt-12 mb-4">منتجات ذات صلة</h2>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5" id="relatedProducts">
+        </div>
+
+     </div>
+    
+
+  </div>
+
+  <footer dir="rtl" class="bg-black text-white mt-10">
+      <div class="container mx-auto px-4 py-8 md:py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-right">
+        
+        <div class="col-span-1">
+          <img
+            src="https://raw.githubusercontent.com/febashop/website-assets/72637aedc92d677158e613bfd8b295b6dd6edb72/feba-logo-white.svg"
+            alt="Feba Logo White"
+            class="h-16 w-auto mb-4 inline-block"
+          />
+          <p class="text-sm text-gray-400 mb-4">
+            متجر FEBA هو وجهتك للأزياء والإكسسوارات النسائية. لطلب أو استفسار، تواصل معنا:
+          </p>
+          
+          <a dir="ltr" href="https://wa.me/212619786178" target="_blank" class="text-sm font-bold text-orange-500 hover:text-orange-300 transition flex items-center justify-end">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512" class="h-5 w-5 text-green-500 mr-2">
+                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+              </svg> 
+            <span class="text-white text-base font-semibold">212619786178</span>
+              
+            </a>
+        </div>
+
+        <div class="col-span-1">
+          <h3 class="text-lg font-bold mb-4 border-b border-orange-500 pb-1 inline-block">تابعونا</h3>
+          <ul class="space-y-2 text-sm mt-4">
+            <li><a href="https://www.instagram.com/febashop/" target="_blank" class="text-gray-400 hover:text-orange-500 transition">إنستغرام</a></li>
+            <li><a href="https://www.tiktok.com/@feba_shop" target="_blank" class="text-gray-400 hover:text-orange-500 transition">تيك توك</a></li>
+            <li><a href="../../index.html" class="text-gray-400 hover:text-orange-500 transition">الرئيسية</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-span-1">
+          <h3 class="text-lg font-bold mb-4 border-b border-orange-500 pb-1 inline-block">الدفع والشحن</h3>
+          <p class="text-sm text-gray-400 mb-4 mt-4">
+            يتم الدفع **عند الاستلام** وتوفير خدمة الشحن لجميع المدن المغربية.
+          </p>
+          
+          <div class="text-right">
+            <span class="bg-white text-black text-xs font-bold px-3 py-1 rounded shadow-md inline-block">
+                الدفع عند الاستلام
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="py-4 container mx-auto px-4 text-center border-t border-gray-800 text-gray-500 text-sm">
+        &copy; 2026 FEBAshop. جميع الحقوق محفوظة.
+      </div>
+    </footer>
+    <script>
+    // بيانات المنتج الرئيسي (جواهر)
+    const product = {
+      title: "(inoxydable)سوطوار سي دي  ",
+      categoryTag: "#مجوهرات",
+      salePrice: "140.00",
+      originalPrice: "170.00",
+      images: [
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets@main/products/mojawharat/sautoir-cd-inoxydable/sautoir-cd-inoxydable001.webp",
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets@main/products/mojawharat/sautoir-cd-inoxydable/sautoir-cd-inoxydable002.webp",
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets@main/products/mojawharat/sautoir-cd-inoxydable/sautoir-cd-inoxydable003.webp",
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets@main/products/mojawharat/sautoir-cd-inoxydable/sautoir-cd-inoxydable004.webp",
+        "https://cdn.jsdelivr.net/gh/febashop/website-assets@main/products/mojawharat/sautoir-cd-inoxydable/sautoir-cd-inoxydable005.webp",
+      ],
+
+      alt: "مجموعة جواهر FEBA الفاخرة",
+      sizes: [],
+      sizeDescriptions: {
+        
+      }
+    };
+
+    // عناصر DOM
+    const mainImage = document.getElementById("mainImage");
+    const mainImageSkeleton = document.getElementById("mainImageSkeleton");
+    const thumbnailList = document.getElementById("thumbnailList");
+    const sizesContainer = document.getElementById("sizes");
+    const selectedSize = document.getElementById("selectedSize");
+    const prevArrow = document.getElementById("prev");
+    const nextArrow = document.getElementById("next");
+    const shareButton = document.getElementById("shareButton");
+    const whatsappOrderButton = document.getElementById("whatsappOrderButton");
+    const saleBox = document.getElementById("saleBox");
+    const pageTitle = document.getElementById("pageTitle"); 
+    const productTitleDisplay = document.getElementById("productTitleDisplay"); 
+    const productTagDisplay = document.getElementById("productTagDisplay"); 
+
+    // متغيرات لتخزين الاختيارات الحالية
+    let currentImageIndex = 0; 
+    let currentSizeIndex = 1; 
+    let saleEndDate = null;
+    let isOfferActive = true;
+
+    // دالة لتنسيق التاريخ بالصيغة العربية (DD/MM/YYYY)
+    function formatDate(date) {
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+
+    // دالة لتهيئة تاريخ الانتهاء
+    function initializeSaleEndDate() {
+      const today = new Date();
+      const endDate = new Date(today);
+      endDate.setDate(today.getDate() + 8);
+      return endDate;
+    }
+
+    // دالة لفحص إذا كان العرض لا يزال نشطًا
+    function checkOfferStatus() {
+      const today = new Date();
+      const timeDiff = saleEndDate.getTime() - today.getTime();
+      const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      
+      return daysDiff > 0;
+    }
+
+    // دالة لتحديث عرض سعر المنتج
+    function updatePriceDisplay() {
+      isOfferActive = checkOfferStatus();
+      
+      if (isOfferActive) {
+        const today = new Date();
+        const timeDiff = saleEndDate.getTime() - today.getTime();
+        const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        
+        saleBox.innerHTML = `
+          <div class = "border border-orange-500 bg-white rounded mt-4 shadow-sm">
+          <div>
+            <div class="flex left-50 bg-red-500 text-white px-4 py-2 text-sm font-bold text-[15px] justify-between items-center">
+              <span>عرض صالح إلى غاية</span>
+              <span class="sale-date-display">${formatDate(saleEndDate)} (⏳ ${daysDiff} يوم)</span>
+            </div>
+          </div>
+
+          <div class="px-4 py-3">
+            <div class="text-3xl font-extrabold text-gray-900">
+              ${product.salePrice} درهم 
+            </div>
+            <div class="flex items-center gap-3 mt-1">
+              <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded font-bold">
+                تخفيض بقيمة ${(parseFloat(product.originalPrice) - parseFloat(product.salePrice)).toFixed(2)} درهم
+              </span>
+              <span class="line-through text-gray-500">${product.originalPrice} درهم</span>
+            </div>
+          </div>
+          </div>
+        `;
+        
+        const dateSpan = saleBox.querySelector('.sale-date-display');
+        if (daysDiff <= 3) {
+          dateSpan.classList.add('animate-pulse', 'text-yellow-300', 'font-bold');
+        }
+      } else {
+        saleBox.innerHTML = `
+          <div class="px-4 py-3">
+            <div class="text-3xl font-extrabold">
+              ${product.originalPrice} درهم 
+            </div>
+            
+          </div>
+        `;
+        
+        saleBox.classList.remove('border-orange-500');
+        saleBox.classList.add('border-gray-300');
+      }
+    }
+
+    // دالة لإنشاء رسالة واتساب مع المعلومات المختارة
+    function createWhatsAppMessage() {
+      const selectedSizeValue = product.sizes[currentSizeIndex];
+      const sizeDescription = product.sizeDescriptions[selectedSizeValue] || "";
+      
+      // إنشاء رسالة مفصلة
+      const message = `مرحباً، أرغب في طلب المنتج التالي:
+
+💎 *${product.title}*
+📏 *المقاس:* ${selectedSizeValue} ${sizeDescription ? `(${sizeDescription})` : ''}
+
+🔗 رابط المنتج: ${window.location.href}
+
+هل المنتج متوفر بالمقاس المختار؟
+وشكراً!`;
+      
+      const encodedMessage = encodeURIComponent(message);
+      const phoneNumber = "212619786178";
+      
+      return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    }
+
+    // دالة لفتح رابط واتساب مع المعلومات المختارة
+    function openWhatsAppWithOrder() {
+      if (currentSizeIndex === null) {
+          alert("الرجاء اختيار المقاس أولاً لإتمام الطلب.");
+          return;
+      }
+      const whatsappUrl = createWhatsAppMessage();
+      window.open(whatsappUrl, '_blank');
+    }
+
+    // دالة لتحديث النصوص من بيانات المنتج
+    function updateProductText() {
+        pageTitle.textContent = `${product.title} - FEBA shop`;
+        productTitleDisplay.textContent = product.title;
+        productTagDisplay.textContent = product.categoryTag;
+    }
+
+    // دالة لتحميل الصورة الرئيسية
+    function loadMainImage(url, altText) {
+        mainImageSkeleton.classList.remove('hidden');
+        mainImage.classList.add('opacity-0'); 
+        mainImage.alt = altText;
+
+        const completeLoad = () => {
+            mainImageSkeleton.classList.add('hidden');
+            mainImage.classList.remove('opacity-0'); 
+            mainImage.onload = null; 
+        };
+        
+        mainImage.onload = completeLoad;
+        mainImage.src = url;
+
+        if (mainImage.complete) {
+            completeLoad();
+        }
+
+        mainImage.onerror = () => {
+            mainImageSkeleton.classList.add('hidden'); 
+            mainImage.classList.remove('opacity-0');
+            mainImage.src = "fallback-error.png"; 
+        };
+    }
+
+    // دالة لتحميل جميع الصور
+    function preloadAllImages() {
+        product.images.forEach(imgUrl => {
+            const preloader = new Image();
+            preloader.src = imgUrl;
+        });
+    }
+
+    function renderUI() {
+      // إنشاء الصور المصغرة
+      thumbnailList.innerHTML = "";
+      product.images.forEach((imgSrc, idx) => {
+        const thumbnailWrapper = document.createElement("div");
+        thumbnailWrapper.className = "relative w-20 h-20 rounded flex-shrink-0";
+        
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.alt = `${product.alt} (صورة ${idx + 1})`; 
+        img.loading = "lazy";
+        img.className = "thumbnail w-full h-full object-cover border-2 cursor-pointer rounded transition-opacity duration-300 " +
+          (idx === currentImageIndex ? "border-orange-500" : "border-gray-200");
+        
+        img.classList.add('opacity-0');
+        const skeletonDiv = document.createElement('div');
+        skeletonDiv.className = 'absolute inset-0 thumbnail-skeleton skeleton';
+        
+        img.onload = () => {
+            img.classList.remove('opacity-0');
+            skeletonDiv.classList.add('hidden');
+            img.onload = null;
+        };
+
+        if (idx === currentImageIndex) {
+             img.loading = "eager";
+        }
+        
+        thumbnailWrapper.appendChild(skeletonDiv);
+        thumbnailWrapper.appendChild(img);
+        
+        img.addEventListener("click", () => setCurrentImage(idx)); 
+        thumbnailList.appendChild(thumbnailWrapper);
+      });
+      
+      // إنشاء خيارات المقاسات الدائرية
+      sizesContainer.innerHTML = "";
+      product.sizes.forEach((size, idx) => {
+        const sizeDiv = document.createElement("div");
+        sizeDiv.className = "flex flex-col items-center";
+        
+        const btn = document.createElement("button");
+        btn.textContent = size;
+        btn.className = "size-option-circle " + (idx === currentSizeIndex ? "selected" : "");
+        btn.setAttribute("aria-label", `المقاس ${size}`);
+        btn.addEventListener("click", () => setSize(idx));
+        
+        const description = document.createElement("div");
+        description.className = "text-xs text-gray-600 mt-1 text-center";
+        description.textContent = product.sizeDescriptions[size] || "";
+        
+        sizeDiv.appendChild(btn);
+        sizeDiv.appendChild(description);
+        sizesContainer.appendChild(sizeDiv);
+      });
+
+      selectedSize.textContent = product.sizes[currentSizeIndex];
+    }
+
+    // دالة لتغيير الصورة
+    function setCurrentImage(idx) {
+      currentImageIndex = idx;
+      const url = product.images[currentImageIndex];
+      loadMainImage(url, product.alt);
+      renderUI();
+    }
+
+    function setSize(idx) {
+      currentSizeIndex = idx;
+      renderUI();
+    }
+
+    // التنقل بين الصور
+    prevArrow.addEventListener("click", () => {
+      currentImageIndex = (currentImageIndex - 1 + product.images.length) % product.images.length; 
+      loadMainImage(product.images[currentImageIndex], product.alt);
+      renderUI();
+    });
+
+    nextArrow.addEventListener("click", () => {
+      currentImageIndex = (currentImageIndex + 1) % product.images.length;
+      loadMainImage(product.images[currentImageIndex], product.alt);
+      renderUI();
+    });
+
+    // تهيئة النظام
+    saleEndDate = initializeSaleEndDate();
+    
+    updateProductText();
+    preloadAllImages();
+    
+    loadMainImage(product.images[currentImageIndex], product.alt); 
+    renderUI();
+    updatePriceDisplay();
+
+    setInterval(updatePriceDisplay, 3600000);
+
+    // بيانات المنتجات ذات الصلة (جواهر وإكسسوارات)
+    const relatedProducts = [
+      {
+          title: "بيجامة طويلة موبرة مزوقة",
+          img: "https://cdn.jsdelivr.net/gh/febashop/website-assets@main/products/pyjama/pyjama-twila-mopra-mzaw9a/pyjama-twila-mopra-mzaw9a-bleu002.webp",
+          price: "160.00",
+          originalPrice: "200.00",
+          discount: 20,
+          category: "بيجامة",
+          tag: "جديد",
+          link: "https://shop.febashop.workers.dev/products/pyjama/%D8%A8%D9%8A%D8%AC%D8%A7%D9%85%D8%A9-%D8%B7%D9%88%D9%8A%D9%84%D8%A9-%D9%85%D9%88%D8%A8%D8%B1%D8%A9-%D9%85%D8%B2%D9%88%D9%82%D8%A9",
+          alt: "بيجامة طويلة موبرة مزوقة" 
+        },
+
+      {
+          title: "بيجامة طويلة الكم بالشبكة",
+          img: "https://cdn.jsdelivr.net/gh/febashop/website-assets@main/products/pyjama/pyjama-twila-blkom-chbka/pyjama-twila-blkom-chbka-ciel002.webp",
+          price: "160.00",
+          originalPrice: "200.00",
+          discount: 20,
+          category: "بيجامة",
+          tag: "جديد",
+          link: "https://shop.febashop.workers.dev/products/pyjama/%D8%A8%D9%8A%D8%AC%D8%A7%D9%85%D8%A9-%D8%B7%D9%88%D9%8A%D9%84%D8%A9-%D8%A7%D9%84%D9%83%D9%85-%D8%A8%D8%A7%D9%84%D8%B4%D8%A8%D9%83%D8%A9",
+          alt: "بيجامة طويلة الكم بالشبكة" 
+      },
+
+
+      {
+          title: "أونصومبل أندلس",
+          img: "https://cdn.jsdelivr.net/gh/febashop/website-assets@main/products/enssembl/enssembl-andalous/enssemble-andalous-grouna001.webp",
+          price: "230.00",
+          originalPrice: "349.00",
+          discount: 34,
+          category: "أونصومبل",
+          tag: "جديد",
+          link: "https://shop.febashop.workers.dev/products/enssemble/%D8%A3%D9%88%D9%86%D8%B5%D9%88%D9%85%D8%A8%D9%84-%D8%A3%D9%86%D8%AF%D9%84%D8%B3",
+          alt: "أونصومبل أندلس"  
+      },
+      {
+          title: "عباية نور الإمراتية",
+          img: "https://cdn.jsdelivr.net/gh/febashop/website-assets/products/abaya/abaya-nour/abaya-nour-beige001.webp",
+          price: "309.00",
+          originalPrice: "400.00",
+          discount: 23,
+          category: "عباية",
+          tag: "",
+          link: "https://shop.febashop.workers.dev/products/abaya/%D8%B9%D8%A8%D8%A7%D9%8A%D8%A9-%D9%86%D9%88%D8%B1-%D8%A7%D9%84%D8%A5%D9%85%D8%B1%D8%A7%D8%AA%D9%8A%D8%A9-%D8%A8%D8%A7%D9%84%D9%81%D9%88%D9%84%D8%A7%D8%B1",
+          alt: "عباية نور الإمراتية"  
+      },
+
+      {
+          title: "أونصومبل جوبة",
+          img: "https://cdn.jsdelivr.net/gh/febashop/website-assets@main/products/enssembl/enssemnle-jupe/enssembl-jupe-camel002.webp",
+          price: "230.00",
+          originalPrice: "300.00",
+          discount: 23,
+          category: "أونصومبل",
+          tag: "",
+          link: "https://shop.febashop.workers.dev/products/enssemble/%D8%A3%D9%88%D9%86%D8%B5%D9%88%D9%85%D8%A8%D9%84-%D8%AC%D9%88%D8%A8%D8%A9" ,
+          alt: "أونصومبل جوبة" 
+        },
+      
+      {
+        title: "عباية ستراس الإمراتية",
+        img: "https://cdn.jsdelivr.net/gh/febashop/website-assets/products/abaya/abaya-strass/abaya-strass-move001.webp",
+        price: "349.00",
+        originalPrice: "450.00",
+        discount: 13,
+        category: "عباية",
+        tag: "الأكثر مبيعا",
+        link: "https://shop.febashop.workers.dev/products/abaya/%D8%B9%D8%A8%D8%A7%D9%8A%D8%A9-%D8%B3%D8%AA%D8%B1%D8%A7%D8%B3-%D8%A7%D9%84%D8%A5%D9%85%D8%B1%D8%A7%D8%AA%D9%8A%D8%A9-%D8%A8%D8%A7%D9%84%D9%81%D9%88%D9%84%D8%A7%D8%B1",
+        alt: "عباية ستراس الإمراتية"
+      },
+      
+    ];
+
+    // إنشاء بطاقات المنتجات ذات الصلة
+    const relatedProductsGrid = document.getElementById("relatedProducts");
+    
+    relatedProductsGrid.innerHTML = "";
+
+    relatedProducts.forEach(product => {
+        const card = document.createElement("a");
+        card.href = product.link;
+        card.className = "product-card block relative  overflow-hidden border border-gray-100  transition-all duration-300 hover:-translate-y-1";
+        
+        card.innerHTML = `
+            <div class="product-skeleton-overlay absolute inset-0 z-10 p-3 flex flex-col bg-white">
+              <div class="productCardSkeleton w-full h-40 md:h-48 mb-3"></div> <div class="flex justify-end mb-2"><div class="productCardSkeleton w-20 h-3"></div></div> <div class="productCardSkeleton w-full h-4 mb-3"></div> <div class="mt-auto flex justify-end"><div class="productCardSkeleton w-24 h-5"></div></div> </div>
+
+            <div class="product-content-hidden flex flex-col h-full">
+              <div class="relative">
+                <img src="${product.img}" 
+                     class="w-full h-40 md:h-48 object-cover" 
+                     alt="${product.title}" 
+                     loading="lazy"
+                     onload="this.closest('.product-card').classList.add('is-product-ready')">
+                
+                ${product.discount ? `<div class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded font-bold text-[8px] md:text-xs">-${product.discount}%</div>` : ''}
+                ${product.tag ? `<div class="absolute top-2 left-2 bg-black text-white px-2 py-1 rounded font-bold text-[8px] md:text-xs">${product.tag}</div>` : ''}
+              </div>
+
+              <div dir="ltr" class="p-3 flex flex-col flex-grow">
+                <div class="float-right mb-1">
+                  <div class="flex items-center justify-end space-x-2">
+                <span class="text-[8px] md:text-xs text-gray-500">التوصيل مجاني</span>
+                <span class="text-[8px] md:text-xs text-red-500 bg-gray-200 px-2 py-1 rounded">${product.category}</span>
+              </div>
+                </div>
+
+                <h3 class="text-sm font-medium text-gray-800 mb-2 text-right">${product.title}</h3>
+
+                <div class="mt-auto float-right">
+                  <div class="flex items-center justify-end">
+                    <span class="text-[15px] font-bold text-orange-500">${product.price} MAD</span>
+                    ${product.originalPrice ? `<span class="original-price text-[9px] md:text-[12px] ml-2 line-through text-gray-400">${product.originalPrice} MAD</span>` : ''}
+                  </div>
+                </div>
+              </div>
+            </div>
+        `;
+        relatedProductsGrid.appendChild(card);
+    });
+
+    // تأثير تغيير النص
+    const texts = [
+      "لمستك الأنيقة تبدأ هنا",
+      "موضتك… كما تحبين",
+      "اختيارك يعبر عنك",
+      "أناقة كل يوم",
+      "إطلالتك أجمل معنا"
+    ];
+
+    const effects = [
+      "opacity-0 translate-y-3",
+      "opacity-0 -translate-y-3",
+      "opacity-0 scale-95",
+      "opacity-0 blur-sm"
+    ];
+
+    let index = 0;
+    const el = document.getElementById("elegantText");
+
+    function changeText() {
+      const effect = effects[Math.floor(Math.random() * effects.length)];
+      el.classList.add(...effect.split(" "));
+      setTimeout(() => {
+        index = (index + 1) % texts.length;
+        el.textContent = texts[index];
+        el.classList.remove(...effect.split(" "));
+      }, 650);
+    }
+
+    setInterval(changeText, 2800);
+
+    let index2 = 0;
+    const el2 = document.getElementById("elegantText2");
+
+    function changeText2() {
+      const effect = effects[Math.floor(Math.random() * effects.length)];
+      el2.classList.add(...effect.split(" "));
+      setTimeout(() => {
+        index2 = (index2 + 1) % texts.length;
+        el2.textContent = texts[index2];
+        el2.classList.remove(...effect.split(" "));
+      }, 650);
+    }
+
+    setInterval(changeText2, 2800);
+
+    // ربط الأزرار بالوظائف
+    if (whatsappOrderButton) {
+        whatsappOrderButton.addEventListener("click", openWhatsAppWithOrder);
+    }
+
+    if (shareButton) {
+        shareButton.addEventListener("click", () => {
+            const shareData = {
+                title: product.title,
+                text: `احصلي على "${product.title}" الآن من FEBA shop. متوفر بسعر: ${isOfferActive ? product.salePrice : product.originalPrice} درهم.`,
+                url: window.location.href,
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData);
+            } else {
+                navigator.clipboard.writeText(`${shareData.text}\n${shareData.url}`).then(() => {
+                    alert('تم نسخ تفاصيل المنتج ورابطه إلى الحافظة! يمكنك مشاركتها الآن.');
+                });
+            }
+        });
+    }
+
+  </script>
+
+</body>
+</html>
